@@ -1,70 +1,21 @@
 'use client'
 
-import React from 'react'
+import { useState } from 'react'
 
 const Conditionals = () => {
-  const isLoading = false
-  const isError = false
-  const data = [
-    {
-      id: 1,
-      name: 'John Doe',
-      age: 30,
-      address: '123 Main St',
-    },
-    {
-      id: 2,
-      name: 'João Doe',
-      age: 20,
-      address: '456 Main St',
-    },
-  ]
+  const [isValid, setIsValid] = useState(false)
 
   return (
     <>
       <h2>Condicionais no JSX</h2>
 
-      {/* melhor maneira de tratar estados de uma api */}
-      {isLoading && <p>Loading...</p>}
+      {/* forma de renderização que não reaproveita a tag, muito útil pra alterar a tag que não vai ser reaproveitada */}
 
-      {isError && <p>Error...</p>}
+      <div>{isValid && <p>é válido</p>}</div>
 
-      {!isLoading &&
-        !isError &&
-        data.length > 0 &&
-        data.map((person) => {
-          return (
-            <div key={person.id}>
-              <p>{person.name}</p>
-              <p>{person.age}</p>
-              <p>{person.address}</p>
-            </div>
-          )
-        })}
+      <>{!isValid && <p>não é válido</p>}</>
 
-      {/*   {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <>
-          {isError ? (
-            <>
-              <p>Error...</p>
-            </>
-          ) : (
-            <>
-              {data.map((person) => {
-                return (
-                  <div key={person.id}>
-                    <p>{person.name}</p>
-                    <p>{person.age}</p>
-                    <p>{person.address}</p>
-                  </div>
-                )
-              })}
-            </>
-          )}
-        </>
-      )} */}
+      <button onClick={() => setIsValid(!isValid)}>Toogle</button>
     </>
   )
 }
